@@ -3,8 +3,8 @@ package goqrsvg
 
 import (
 	"errors"
+	"fmt"
 	"image/color"
-
 	"github.com/ajstarks/svgo"
 	"github.com/boombuler/barcode"
 )
@@ -33,7 +33,7 @@ func NewQrSVG(qr barcode.Barcode, blockSize int) QrSVG {
 }
 
 // WriteQrSVG writes the QR Code to SVG.
-func (qs *QrSVG) WriteQrSVG(s *svg.SVG) error {
+func (qs *QrSVG) WriteQrSVG(s *svg.SVG, darkColor string, lightColor string) error {
 	if qs.qr.Metadata().CodeKind == "QR Code" {
 		currY := qs.startingY
 
@@ -41,9 +41,9 @@ func (qs *QrSVG) WriteQrSVG(s *svg.SVG) error {
 			currX := qs.startingX
 			for y := 0; y < qs.qrWidth; y++ {
 				if qs.qr.At(x, y) == color.Black {
-					s.Rect(currX, currY, qs.blockSize, qs.blockSize, "fill:black;stroke:none")
+					s.Rect(currX, currY, qs.blockSize, qs.blockSize, fmt.Sprintf("fill:%v;stroke:none",darkColor))
 				} else if qs.qr.At(x, y) == color.White {
-					s.Rect(currX, currY, qs.blockSize, qs.blockSize, "fill:white;stroke:none")
+					s.Rect(currX, currY, qs.blockSize, qs.blockSize, fmt.Sprintf("fill:%v;stroke:none",lightColor))
 				}
 				currX += qs.blockSize
 			}

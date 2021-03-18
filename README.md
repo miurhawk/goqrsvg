@@ -1,9 +1,11 @@
 # goqrsvg
 goqrsvg is an API that makes QR Code to SVG conversions.
+this is forked from github.com/aaronarduino/goqrsvg
+added is the ability to set specific colors on the svg
 
 ## To use:
 
-`import "github.com/aaronarduino/goqrsvg"`
+`import "github.com/miurhawk/goqrsvg"`
 
 ## Uses:
 ```
